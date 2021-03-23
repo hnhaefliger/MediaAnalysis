@@ -36,7 +36,7 @@ def countMentions(post):
     Count the mentions of different tickers in a text.
     '''
     regex = re.compile("[^a-zA-Z' ]")
-    text = post['title'] + '. ' + post['selftext']
+    text = post['text']
     text = text.replace('/', '')
     text = regex.sub('', text)
 
