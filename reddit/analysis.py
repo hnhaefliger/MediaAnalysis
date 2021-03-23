@@ -25,11 +25,15 @@ def isNotEnglish(word):
     
     return not(dictionary.check(word))
     
-def isTicker(word):
+def isTicker(ticker):
     '''
     Check if a word is in the english dictionary. 
     '''
-    return isNotEnglish(ticker) and onYahooFinance(ticker)
+    if len(ticker) > 0:
+        return isNotEnglish(ticker) and onYahooFinance(ticker)
+
+    else:
+        return False
 
 def countMentions(post):
     '''

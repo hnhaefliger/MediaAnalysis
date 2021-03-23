@@ -1,15 +1,15 @@
-from reddit import *
+import reddit
 
 def getStocks(subreddit, ranking, limit):
     '''
     Get a list of highest scoring stocks on a subreddit.
     '''
-    data = getPosts(subreddit, ranking, limit)
+    data = reddit.getPosts(subreddit, ranking, limit)
 
     stocks = {}
 
     for post in data:
-        for stock in countMentions(post):
+        for stock in reddit.countMentions(post):
             if stock in stocks:
                 stocks[stock] += 1
 
