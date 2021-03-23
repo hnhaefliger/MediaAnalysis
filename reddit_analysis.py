@@ -1,5 +1,4 @@
-from .reddit import getPosts
-from .analysis import countMentions
+from reddit import *
 
 def getStocks(subreddit, ranking, limit):
     '''
