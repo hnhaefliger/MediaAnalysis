@@ -30,7 +30,8 @@ def isTicker(ticker):
     Check if a word is in the english dictionary. 
     '''
     if len(ticker) > 0:
-        return isNotEnglish(ticker) and onYahooFinance(ticker)
+        if isNotEnglish(ticker):
+            return onYahooFinance(ticker)
 
     else:
         return False
