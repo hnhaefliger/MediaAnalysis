@@ -3,8 +3,9 @@ import warnings
 import enchant
 import re
 import random
+import os
 
-with open('stocks.csv', 'r') as f:
+with open(os.path.dirname(os.path.abspath(__file__)) + '/stocks.csv', 'r') as f:
     tickers = f.read().split(',')
 
 def onYahooFinance(ticker):
