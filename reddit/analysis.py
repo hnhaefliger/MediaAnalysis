@@ -4,20 +4,14 @@ import enchant
 import re
 import random
 
-from .tickers import getAllTickers
+with open('stocks.csv', 'r') as f:
+    tickers = f.read().split(',')
 
 def onYahooFinance(ticker):
     '''
     Check if a symbol is on yahoo finance.
     '''
-    headers = {'User-Agent': ''.join([str(random.randint(0,9)) for i in range(10)])}
-
-    with warnings.catch_warnings():
-        warnings.simplefilter("ignore")
-
-        response = requests.get('https://query1.finance.yahoo.com/v7/finance/download/' + ticker, verify=False, headers=headers, stream=True)
-
-    return response.status_code == 200
+    return ticker in tickers
 
 def isNotEnglish(word):
     '''
