@@ -1,4 +1,5 @@
 import reddit
+import enchant
 
 def getStocks(subreddit, ranking, limit):
     '''
@@ -16,4 +17,11 @@ def getStocks(subreddit, ranking, limit):
             else:
                 stocks[stock] = 1
 
-    return stocks
+    dictionary = enchant.Dict("en_US")
+    cleanstocks = {}
+    
+    for stock in stocks.keys():
+        if not(dictionary.check(stock)):
+            cleanstocks[stock] = stocks[stock]
+
+    return cleanstocks
