@@ -1,6 +1,5 @@
 import requests
 import warnings
-import enchant
 import re
 import random
 import os
@@ -13,22 +12,13 @@ def onYahooFinance(ticker):
     Check if a symbol is on yahoo finance.
     '''
     return ticker in tickers
-
-def isNotEnglish(word):
-    '''
-    Check if a word is not in the english language.
-    '''
-    dictionary = enchant.Dict("en_US")
-    
-    return not(dictionary.check(word))
     
 def isTicker(ticker):
     '''
     Check if a word is in the english dictionary. 
     '''
     if len(ticker) > 0:
-        if isNotEnglish(ticker):
-            return onYahooFinance(ticker)
+        return onYahooFinance(ticker)
 
     else:
         return False
@@ -40,12 +30,12 @@ def countMentions(post):
     regex = re.compile("[^a-zA-Z' ]")
     text = post['text']
     text = text.replace('/', '')
-    text = regex.sub('', text)
+    text = regex.sub(' ', text)
 
     stocks = []
 
     for word in text.split(' '):
-        if isTicker(word):
+        if isTicker(word.lower()):
             stocks.append(word.upper())
 
     return stocks

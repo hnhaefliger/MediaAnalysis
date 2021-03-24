@@ -1,6 +1,7 @@
 import requests
 import random
 import json
+import warnings
 
 def cleanPost(post):
     '''
@@ -37,7 +38,10 @@ def getComments(subreddit, post):
     Get all comments on a post.
     '''
     headers = {'User-Agent': ''.join([str(random.randint(0,9)) for i in range(10)])}
-    response = requests.get('https://www.reddit.com/r/' + subreddit + '/comments/' + post + '.json?limit=100000', headers=headers)
+
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        response = requests.get('https://www.reddit.com/r/' + subreddit + '/comments/' + post + '.json?limit=100000', headers=headers, verify=False)
 
     data = response.json()[1]['data']['children']
 
@@ -53,7 +57,10 @@ def getPosts(subreddit, ranking, limit):
     Get all posts from a subreddit.
     '''
     headers = {'User-Agent': ''.join([str(random.randint(0,9)) for i in range(10)])}
-    response = requests.get('https://www.reddit.com/r/' + subreddit + '/' + ranking + '/.json?limit=' + str(limit), headers=headers)
+
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        response = requests.get('https://www.reddit.com/r/' + subreddit + '/' + ranking + '/.json?limit=' + str(limit), headers=headers, verify=False)
 
     data = response.json()['data']['children']
     data = [cleanPost(post['data']) for post in data]
