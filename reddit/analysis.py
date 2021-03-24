@@ -4,6 +4,8 @@ import enchant
 import re
 import random
 
+from .tickers import getAllTickers
+
 def onYahooFinance(ticker):
     '''
     Check if a symbol is on yahoo finance.
