@@ -25,3 +25,21 @@ def getStocks(subreddit, ranking, limit):
             cleanstocks[stock] = stocks[stock]
 
     return cleanstocks
+
+
+def getSubs(subreddits, ranking):
+    '''
+    Total mentions from several subreddits.
+    '''
+    stocks = {}
+
+    for subreddit in subreddits:
+        found = getStocks(subreddit, ranking, 100)
+        for stock in found:
+            if stock in stocks:
+                stocks[stock] += found[stock]
+
+            else:
+                stocks[stock] = found[stock]
+
+    return stocks
