@@ -1,2 +1,2 @@
-from .analysis import countMentions
+from .analysis import countMentions, score
 from .reddit import getPosts

@@ -16,6 +16,7 @@ def cleanPost(post):
     clean_post['ups'] = post['ups']
     clean_post['downs'] = post['downs']
     clean_post['id'] = post['id']
+    clean_post['created_utc'] = post['created_utc']
 
     if 'depth' in post: clean_post['depth'] = post['depth'] + 1
     else: clean_post['depth'] = 0
@@ -42,6 +43,7 @@ def extractComments(tree):
                 'downs': 0,
                 'id': 0,
                 'depth': 0,
+                'created_utc': 0,
             }]
 
 def getComments(subreddit, post):
